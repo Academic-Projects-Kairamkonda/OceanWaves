@@ -67,7 +67,6 @@ public class Waves : MonoBehaviour
 
         //scale
         return height * transform.lossyScale.y / dist;
-
     }
 
     private Vector3[] GenerateVerts()
