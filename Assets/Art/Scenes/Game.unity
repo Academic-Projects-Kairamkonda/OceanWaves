@@ -223,12 +223,12 @@ MonoBehaviour:
   UVScale: 30
   Octaves:
   - speed: {x: 0.5, y: 0.5}
-    scale: {x: 10, y: 10}
-    height: 0.1
+    frequency: {x: 10, y: 10}
+    amplitude: 0.1
     alternate: 1
   - speed: {x: 0, y: 15}
-    scale: {x: 1.31, y: 8.63}
-    height: 1
+    frequency: {x: 1.31, y: 8.65}
+    amplitude: 1
     alternate: 0
 --- !u!4 &587032713
 Transform:

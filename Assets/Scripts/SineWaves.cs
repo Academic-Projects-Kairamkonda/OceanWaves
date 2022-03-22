@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Waves : MonoBehaviour
+public class SineWaves : MonoBehaviour
 {
     // Public Properties
     public int Dimension = 10;
@@ -142,13 +142,13 @@ public class Waves : MonoBehaviour
                 {
                     if (Octaves[o].alternate)
                     {
-                        var perl = Mathf.PerlinNoise((x * Octaves[o].scale.x) / Dimension, (z * Octaves[o].scale.y) / Dimension) * Mathf.PI * 2f;
-                        y += Mathf.Cos(perl + Octaves[o].speed.magnitude * Time.time) * Octaves[o].height;
+                        var perl = Mathf.PerlinNoise((x * Octaves[o].frequency.x) / Dimension, (z * Octaves[o].frequency.y) / Dimension) * Mathf.PI * 2f;
+                        y += Mathf.Sin(perl + Octaves[o].speed.magnitude * Time.time) * Octaves[o].amplitude;
                     }
                     else
                     {
-                        var perl = Mathf.PerlinNoise((x * Octaves[o].scale.x + Time.time * Octaves[o].speed.x) / Dimension, (z * Octaves[o].scale.y + Time.time * Octaves[o].speed.y) / Dimension) - 0.5f;
-                        y += perl * Octaves[o].height;
+                        var perl = Mathf.PerlinNoise((x * Octaves[o].frequency.x + Time.time * Octaves[o].speed.x) / Dimension, (z * Octaves[o].frequency.y + Time.time * Octaves[o].speed.y) / Dimension) - 0.5f;
+                        y += perl * Octaves[o].amplitude;
                     }
                 }
 
@@ -163,8 +163,8 @@ public class Waves : MonoBehaviour
     public struct Octave
     {
         public Vector2 speed;
-        public Vector2 scale;
-        public float height;
+        public Vector2 frequency;
+        public float amplitude;
         public bool alternate;
     }
 }
