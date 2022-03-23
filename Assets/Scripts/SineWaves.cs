@@ -25,7 +25,7 @@ public class SineWaves : MonoBehaviour
     }
 
     /// <summary>
-    /// 
+    /// Generates the quad on the provided data
     /// </summary>
     private void GenerateMesh()
     {
@@ -44,52 +44,9 @@ public class SineWaves : MonoBehaviour
     }
 
     /// <summary>
-    /// 
+    /// Generate the vertices for the triangles
     /// </summary>
-    /// <param name="position"></param>
-    /// <returns></returns>
-    public float GenerateHeight(Vector3 position)
-    {
-        // scale factor and position in local space
-        var scale = new Vector3(1 / transform.lossyScale.x, 0, 1 / transform.lossyScale.z);
-        var localPos = Vector3.Scale((position - transform.position), scale);
-
-        // get edge points
-        var p1 = new Vector3(Mathf.Floor(localPos.x), 0, Mathf.Floor(localPos.z));
-        var p2 = new Vector3(Mathf.Floor(localPos.x), 0, Mathf.Ceil(localPos.z));
-        var p3 = new Vector3(Mathf.Ceil(localPos.x), 0, Mathf.Floor(localPos.z));
-        var p4 = new Vector3(Mathf.Ceil(localPos.x), 0, Mathf.Ceil(localPos.z));
-
-        //clamp if the position is outside the plane
-        p1.x = Mathf.Clamp(p1.x, 0, Dimension);
-        p1.z = Mathf.Clamp(p1.z, 0, Dimension);
-        p2.x = Mathf.Clamp(p2.x, 0, Dimension);
-        p2.z = Mathf.Clamp(p2.z, 0, Dimension);
-        p3.x = Mathf.Clamp(p3.x, 0, Dimension);
-        p3.z = Mathf.Clamp(p3.z, 0, Dimension);
-        p4.x = Mathf.Clamp(p4.x, 0, Dimension);
-        p4.z = Mathf.Clamp(p4.z, 0, Dimension);
-
-        //get the max distance to one of the edges and take that to compute max - dist
-        var max = Mathf.Max(Vector3.Distance(p1, localPos), Vector3.Distance(p2, localPos), Vector3.Distance(p3, localPos), Vector3.Distance(p4, localPos) + Mathf.Epsilon);
-        var dist = (max - Vector3.Distance(p1, localPos))
-                 + (max - Vector3.Distance(p2, localPos))
-                 + (max - Vector3.Distance(p3, localPos))
-                 + (max - Vector3.Distance(p4, localPos) + Mathf.Epsilon);
-        //weighted sum
-        var height = Mesh.vertices[index(p1.x, p1.z)].y * (max - Vector3.Distance(p1, localPos))
-                   + Mesh.vertices[index(p2.x, p2.z)].y * (max - Vector3.Distance(p2, localPos))
-                   + Mesh.vertices[index(p3.x, p3.z)].y * (max - Vector3.Distance(p3, localPos))
-                   + Mesh.vertices[index(p4.x, p4.z)].y * (max - Vector3.Distance(p4, localPos));
-
-        //scale
-        return height * transform.lossyScale.y / dist;
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <returns></returns>
+    /// <returns>each position of the vertex in array</returns>
     private Vector3[] GenerateVertices()
     {
         var verts = new Vector3[(Dimension + 1) * (Dimension + 1)];
@@ -103,9 +60,9 @@ public class SineWaves : MonoBehaviour
     }
 
     /// <summary>
-    /// 
+    /// Generate the triangles with the x and z coordinates
     /// </summary>
-    /// <returns></returns>
+    /// <returns> vertice of mesh</returns>
     private int[] GenerateTries()
     {
         var tries = new int[Mesh.vertices.Length * 6];
@@ -128,7 +85,7 @@ public class SineWaves : MonoBehaviour
     }
 
     /// <summary>
-    /// 
+    /// UV  texture maps to vertices of the mesh
     /// </summary>
     /// <returns></returns>
     private Vector2[] GenerateUVs()
@@ -187,12 +144,20 @@ public class SineWaves : MonoBehaviour
                 {
                     if (Octaves[o].alternate)
                     {
-                        var perl = Mathf.PerlinNoise((x * Octaves[o].frequency.x) / Dimension, (z * Octaves[o].frequency.y) / Dimension) * Mathf.PI * 2f;
+                        var perl = Mathf.PerlinNoise
+                            (
+                            (x * Octaves[o].frequency.x) / Dimension,
+                            (z * Octaves[o].frequency.y) / Dimension
+                            ) * Mathf.PI * 2f;
                         y += Mathf.Sin(perl + Octaves[o].speed.magnitude * Time.time) * Octaves[o].amplitude;
                     }
                     else
                     {
-                        var perl = Mathf.PerlinNoise((x * Octaves[o].frequency.x + Time.time * Octaves[o].speed.x) / Dimension, (z * Octaves[o].frequency.y + Time.time * Octaves[o].speed.y) / Dimension) - 0.5f;
+                        var perl = Mathf.PerlinNoise
+                            (
+                            (x * Octaves[o].frequency.x + Time.time * Octaves[o].speed.x) / Dimension,
+                            (z * Octaves[o].frequency.y + Time.time * Octaves[o].speed.y) / Dimension
+                            ) - 0.5f;
                         y += perl * Octaves[o].amplitude;
                     }
                 }
