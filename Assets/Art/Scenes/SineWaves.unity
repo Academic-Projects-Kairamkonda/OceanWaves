@@ -205,7 +205,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 15115457}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 669864406}
+        m_TargetAssemblyTypeName: CustomizeWave, Assembly-CSharp
+        m_MethodName: SubFrequency
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &15115457
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -401,7 +413,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 69230442}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 669864406}
+        m_TargetAssemblyTypeName: CustomizeWave, Assembly-CSharp
+        m_MethodName: AddSpeed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &69230442
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1182,7 +1206,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 193247563}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 669864406}
+        m_TargetAssemblyTypeName: CustomizeWave, Assembly-CSharp
+        m_MethodName: GetCustomizationData
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &193247563
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1684,9 +1720,9 @@ MonoBehaviour:
   - speed: {x: 0.5, y: 0.5}
     frequency: {x: 10, y: 10}
     amplitude: 0.1
-    alternate: 0
+    alternate: 1
   - speed: {x: 0, y: 15}
-    frequency: {x: 1.31, y: 8.65}
+    frequency: {x: 1.31, y: 8}
     amplitude: 1
     alternate: 0
 --- !u!4 &587032713
@@ -1755,7 +1791,7 @@ GameObject:
   - component: {fileID: 637732625}
   - component: {fileID: 637732626}
   m_Layer: 5
-  m_Name: Slider
+  m_Name: FrequencySlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1880,26 +1916,23 @@ MonoBehaviour:
   sineWaves: {fileID: 587032712}
   generateButton: {fileID: 193247562}
   amplitudeData:
-    value: 0
     slider: {fileID: 1739660540}
     dataText: {fileID: 123657083}
     offset: 0.1
     min: 0.1
     max: 1
   speedData:
-    value: 0
     slider: {fileID: 1028383044}
     dataText: {fileID: 1699621178}
-    offset: 0
-    min: 0
-    max: 0
+    offset: 10
+    min: 15
+    max: 100
   frequencyData:
-    value: 0
     slider: {fileID: 637732626}
     dataText: {fileID: 781836331}
-    offset: 0
-    min: 0
-    max: 0
+    offset: 8
+    min: 8.65
+    max: 50
 --- !u!1 &683774133
 GameObject:
   m_ObjectHideFlags: 0
@@ -1982,7 +2015,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 683774136}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 669864406}
+        m_TargetAssemblyTypeName: CustomizeWave, Assembly-CSharp
+        m_MethodName: SubAmplitude
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &683774136
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2858,13 +2903,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.13052616, y: -0, z: -0, w: 0.9914449}
-  m_LocalPosition: {x: 15, y: 2, z: -1.9}
+  m_LocalRotation: {x: 0.2588191, y: 0, z: 0, w: 0.9659258}
+  m_LocalPosition: {x: 15, y: 7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1348431338}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 15, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 30, y: 0, z: 0}
 --- !u!114 &963194229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2909,7 +2954,7 @@ GameObject:
   - component: {fileID: 1028383043}
   - component: {fileID: 1028383044}
   m_Layer: 5
-  m_Name: Slider
+  m_Name: SpeedSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3416,7 +3461,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1166996721}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 669864406}
+        m_TargetAssemblyTypeName: CustomizeWave, Assembly-CSharp
+        m_MethodName: AddFrequency
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1166996721
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4124,7 +4181,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1516249522}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 669864406}
+        m_TargetAssemblyTypeName: CustomizeWave, Assembly-CSharp
+        m_MethodName: SubSpeed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1516249522
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4548,7 +4617,7 @@ GameObject:
   - component: {fileID: 1739660539}
   - component: {fileID: 1739660540}
   m_Layer: 5
-  m_Name: Slider
+  m_Name: AmplitudeSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
