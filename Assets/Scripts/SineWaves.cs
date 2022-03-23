@@ -14,14 +14,26 @@ public class SineWaves : MonoBehaviour
     protected MeshFilter MeshFilter;
     protected Mesh Mesh;
 
-    // Start is called before the first frame update
     void Start()
+    {
+        GenerateMesh();
+    }
+
+    void Update()
+    {
+        CalculateMeshData();
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    private void GenerateMesh()
     {
         // Mesh Setup
         Mesh = new Mesh();
         Mesh.name = gameObject.name;
 
-        Mesh.vertices = GenerateVerts();
+        Mesh.vertices = GenerateVertices();
         Mesh.triangles = GenerateTries();
         Mesh.uv = GenerateUVs();
         Mesh.RecalculateNormals();
@@ -31,7 +43,12 @@ public class SineWaves : MonoBehaviour
         MeshFilter.mesh = Mesh;
     }
 
-    public float GetHeight(Vector3 position)
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="position"></param>
+    /// <returns></returns>
+    public float GenerateHeight(Vector3 position)
     {
         // scale factor and position in local space
         var scale = new Vector3(1 / transform.lossyScale.x, 0, 1 / transform.lossyScale.z);
@@ -69,7 +86,11 @@ public class SineWaves : MonoBehaviour
         return height * transform.lossyScale.y / dist;
     }
 
-    private Vector3[] GenerateVerts()
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    private Vector3[] GenerateVertices()
     {
         var verts = new Vector3[(Dimension + 1) * (Dimension + 1)];
 
@@ -81,6 +102,10 @@ public class SineWaves : MonoBehaviour
         return verts;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
     private int[] GenerateTries()
     {
         var tries = new int[Mesh.vertices.Length * 6];
@@ -102,6 +127,10 @@ public class SineWaves : MonoBehaviour
         return tries;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
     private Vector2[] GenerateUVs()
     {
         var uvs = new Vector2[Mesh.vertices.Length];
@@ -129,10 +158,26 @@ public class SineWaves : MonoBehaviour
         return index((int)x, (int)z);
     }
 
-    // Update is called once per frame
-    void Update()
+
+    /// <summary>
+    /// Adds the sine wave data to mesh to animate
+    /// </summary>
+    private void CalculateMeshData()
+    {
+         var verts=CalculateSineWave();
+
+        Mesh.vertices = verts;
+        Mesh.RecalculateNormals();
+    }
+
+    /// <summary>
+    /// Calculate sine waves and adds the amplitude to the wave
+    /// </summary>
+    /// <returns> vertices to mesh</returns>
+    private Vector3[] CalculateSineWave()
     {
         var verts = Mesh.vertices;
+
         for (int x = 0; x <= Dimension; x++)
         {
             for (int z = 0; z <= Dimension; z++)
@@ -155,10 +200,13 @@ public class SineWaves : MonoBehaviour
                 verts[index(x, z)] = new Vector3(x, y, z);
             }
         }
-        Mesh.vertices = verts;
-        Mesh.RecalculateNormals();
+
+        return verts;
     }
 
+    /// <summary>
+    /// Octaves add more depth to waves
+    /// </summary>
     [Serializable]
     public struct Octave
     {
